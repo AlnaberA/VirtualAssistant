@@ -26,11 +26,12 @@ if($method == 'POST'){
 			$speech = "Sorry, I didnt get that. Please ask me something else.";
 			break;
 	}
-	$object = array("text"=>$speech);
+	$object = array("text"=>$speech, "image" => null);
 
 	$response = new \stdClass();
 	$response->fulfillmentText = $speech;
 	$response->fulfillmentMessages->object['text'];
+	$response->fulfillmentMessages->object['image'];
 	$response->source = "webhook";
 	echo json_encode($response);
 }
