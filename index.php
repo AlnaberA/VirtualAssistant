@@ -1,10 +1,14 @@
 <?php 
-
+error_reporting(0);
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Process only when method is POST
 if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
+	$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+	fwrite($myfile, $requestBody);
+	fclose($myfile);
+	
 	$json = json_decode($requestBody);
 
 	$text = $json->queryResult->queryText;
@@ -26,12 +30,11 @@ if($method == 'POST'){
 			$speech = "Sorry, I didnt get that. Please ask me something else.";
 			break;
 	}
-	$object = array("text"=>$speech, "image" => null);
-
+    $object = array("text"=>$speech, "image" => "test.png");
+	
 	$response = new \stdClass();
-	$response->fulfillmentText = $speech;
-	$response->fulfillmentMessages->object['text'];
-	$response->fulfillmentMessages->object['image'];
+	$response->fulfillmentText = $speech;    
+    $response->fulfillmentMessages->object;
 	$response->source = "webhook";
 	echo json_encode($response);
 }
