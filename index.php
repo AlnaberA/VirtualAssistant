@@ -14,16 +14,16 @@ if($method == 'POST'){
 	$text = $json->queryResult->queryText;
 
 	switch ($text) {
-		case 'hi':
-			$speech = "Hi, Nice to meet you";
+		case 'Hi':
+			$speech = "Hello! This is a test.";
 			break;
 
-		case 'bye':
-			$speech = "Bye, good night";
+		case 'Goodbye':
+			$speech = "Bye!";
 			break;
 
-		case 'anything':
-			$speech = "Yes, you can type anything here.";
+		case 'What is up?':
+			$speech = "Nothing.";
 			break;
 		
 		default:
@@ -34,7 +34,7 @@ if($method == 'POST'){
 	
 	$response = new \stdClass();
 	$response->fulfillmentText = $speech;    
-    $response->fulfillmentMessages->object;
+   	$response->fulfillmentMessages->object;
 	$response->source = "webhook";
 	echo json_encode($response);
 }
